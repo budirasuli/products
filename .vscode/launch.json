@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-products<products-services>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.modena.products",
+            "projectName": "products-services",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Products_Services<products-services>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.modena.Products_Services",
+            "projectName": "products-services",
+            "args": ""
+        }
+    ]
+}
