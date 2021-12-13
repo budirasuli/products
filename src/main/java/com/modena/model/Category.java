@@ -62,4 +62,9 @@ public class Category {
     public String toString() {
         return "Category [id=" + id + ", name=" + name + ",  active=" + active + ", position=" + position +"]";
     }
+
+    @PostLoad
+    public void postLoad() {
+
+    }
 }
