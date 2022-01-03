@@ -9,5 +9,5 @@ import com.modena.model.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     List<Category> findByActive(Integer active);
     List<Category> findByNameContaining(String name);
-    List<Category> findByPosition(Integer position);   
+    List<Category> findByPosition(Integer position); 
 }

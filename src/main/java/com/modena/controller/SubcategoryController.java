@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.modena.model.Subcategory;
-import com.modena.repository.SubcategoryRepository;
+import com.modena.model.SubCategory;
+import com.modena.repository.SubCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,34 +23,34 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
-public class SubcategoryController {
+public class SubCategoryController {
 
   @Autowired
-  SubcategoryRepository subcategoryRepository;
+  SubCategoryRepository subcategoryRepository;
 
   @GetMapping("/subcategory")
-  public ResponseEntity<List<Subcategory>> getAllSubcategorys(@RequestParam(required = false) String name) {
+  public ResponseEntity<List<SubCategory>> getAllSubCategories(@RequestParam(required = false) String name) {
     try {
-      List<Subcategory> subcategory = new ArrayList<Subcategory>();
+      List<SubCategory> subcategories = new ArrayList<SubCategory>();
 
       if (name == null)
-        subcategoryRepository.findAll().forEach(subcategory::add);
+        subcategoryRepository.findAll().forEach(subcategories::add);
       else
-        subcategoryRepository.findByNameContaining(name).forEach(subcategory::add);
+        subcategoryRepository.findByNameContaining(name).forEach(subcategories::add);
 
-      if (subcategory.isEmpty()) {
+      if (subcategories.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
 
-      return new ResponseEntity<>(subcategory, HttpStatus.OK);
+      return new ResponseEntity<>(subcategories, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   @GetMapping("/subcategory/{id}")
-  public ResponseEntity<Subcategory> getSubcategoryById(@PathVariable("id") long id) {
-    Optional<Subcategory> subcategoryData = subcategoryRepository.findById(id);
+  public ResponseEntity<SubCategory> getSubCategoryById(@PathVariable("id") long id) {
+    Optional<SubCategory> subcategoryData = subcategoryRepository.findById(id);
 
     if (subcategoryData.isPresent()) {
       return new ResponseEntity<>(subcategoryData.get(), HttpStatus.OK);
@@ -60,10 +60,10 @@ public class SubcategoryController {
   }
 
   @PostMapping("/subcategory")
-  public ResponseEntity<Subcategory> createSubcategorys(@RequestBody Subcategory subcategory) {
+  public ResponseEntity<SubCategory> createsubCategorys(@RequestBody SubCategory subcategory) {
     try {
-      Subcategory _subcategory = subcategoryRepository
-      .save(new Subcategory(subcategory.getName(), subcategory.getActive(), subcategory.getPosition(), subcategory.getCategoryid()));
+      SubCategory _subcategory = subcategoryRepository
+      .save(new SubCategory(subcategory.getCategory_id(), subcategory.getName(), subcategory.getActive(), subcategory.getPosition(), subcategory.getCountry_code(), subcategory.getLanguage_code(), subcategory.getTradein(), subcategory.getRental()));
       return new ResponseEntity<>(_subcategory, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,14 +71,19 @@ public class SubcategoryController {
   }
 
   @PutMapping("/subcategory/{id}")
-  public ResponseEntity<Subcategory> updateCategorys(@PathVariable("id") long id, @RequestBody Subcategory subcategory) {
-    Optional<Subcategory> subcategoryData = subcategoryRepository.findById(id);
+  public ResponseEntity<SubCategory> updateSubCategorys(@PathVariable("id") long id, @RequestBody SubCategory subcategory) {
+    Optional<SubCategory> subcategoryData = subcategoryRepository.findById(id);
 
     if (subcategoryData.isPresent()) {
-      Subcategory _subcategory = subcategoryData.get();
+      SubCategory _subcategory = subcategoryData.get();
+      _subcategory.setCategory_id(subcategory.getCategory_id());
       _subcategory.setName(subcategory.getName());
       _subcategory.setActive(subcategory.getActive());
       _subcategory.setPosition(subcategory.getPosition());
+      _subcategory.setCountry_code(subcategory.getCountry_code());
+      _subcategory.setLanguage_code(subcategory.getLanguage_code());
+      _subcategory.setTradein(subcategory.getTradein());
+      _subcategory.setRental(subcategory.getRental());
       return new ResponseEntity<>(subcategoryRepository.save(_subcategory), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -86,7 +91,7 @@ public class SubcategoryController {
   }
 
   @DeleteMapping("/subcategory/{id}")
-  public ResponseEntity<HttpStatus> deleteSubcategorys(@PathVariable("id") long id) {
+  public ResponseEntity<HttpStatus> deleteSubCategorys(@PathVariable("id") long id) {
     try {
       subcategoryRepository.deleteById(id);
       return new ResponseEntity<>(HttpStatus.OK);

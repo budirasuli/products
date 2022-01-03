@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.modena.model.Series;
 import com.modena.repository.SeriesRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,7 +64,7 @@ public class SeriesController {
   public ResponseEntity<Series> createSeries(@RequestBody Series series) {
     try {
       Series _series = seriesRepository
-      .save(new Series(series.getName(), series.getActive(), series.getPosition()));
+      .save(new Series(series.getName(), series.getActive(), series.getSequence(), series.getLanguage_code(), series.getCountry_code()));
       return new ResponseEntity<>(_series, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,7 +79,9 @@ public class SeriesController {
       Series _series = seriesData.get();
       _series.setName(series.getName());
       _series.setActive(series.getActive());
-      _series.setPosition(series.getPosition());
+      _series.setSequence(series.getSequence());
+      _series.setCountry_code(series.getCountry_code());
+      _series.setLanguage_code(series.getLanguage_code());
       return new ResponseEntity<>(seriesRepository.save(_series), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);

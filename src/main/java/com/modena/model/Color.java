@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "master_segments")
-public class Segmen {
+@Table(name = "master_color")
+public class Color {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,8 +17,8 @@ public class Segmen {
     @Column(name = "active")
     private Integer active;
 
-    @Column(name = "position")
-    private Integer position;
+    @Column(name = "sequence")
+    private Integer sequence;
 
     @Column(name = "country_code")
     private String country_code;
@@ -26,14 +26,14 @@ public class Segmen {
     @Column(name = "language_code")
     private String language_code;
 
-    public Segmen() {
+    public Color() {
 
     }
 
-    public Segmen(String name, Integer active, Integer position, String country_code, String language_code) {
+    public Color(String name, Integer active, Integer sequence, String country_code, String language_code) {
         this.name = name;
         this.active = active;
-        this.position = position;
+        this.sequence = sequence;
         this.country_code = country_code;
         this.language_code = language_code;
     }
@@ -58,12 +58,12 @@ public class Segmen {
         this.active = active;
     }
 
-    public Integer getPosition() {
-        return position;
+    public Integer getSequence() {
+        return sequence;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
 
     public String getLanguage_code() {
@@ -87,6 +87,6 @@ public class Segmen {
 
     @Override
     public String toString() {
-        return "Segments [id=" + id + ", name=" + name + ",  active=" + active + ", position=" + position + ", language_code="+ language_code +", country_code=" + country_code +" ]";
+        return "Color [id=" + id + ", name=" + name + ",  active=" + active + ", sequence=" + sequence + ", language_code="+ language_code +", country_code=" + country_code +" ]";
     }
 }

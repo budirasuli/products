@@ -4,12 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.modena.model.Subcategory;
+import com.modena.model.SubCategory;
 
-public interface SubcategoryRepository extends JpaRepository<Subcategory, Long> {
-    List<Subcategory> findByActive(Integer active);
-    List<Subcategory> findByNameContaining(String name);
-    List<Subcategory> findByPosition(Integer position);
-    List<Subcategory> findByCategoryid(Integer categoryid);
-    
+public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
+    List<SubCategory> findByActive(Integer active);
+    List<SubCategory> findByNameContaining(String name);
+    List<SubCategory> findByPosition(Integer position); 
 }

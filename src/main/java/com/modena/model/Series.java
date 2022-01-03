@@ -2,6 +2,7 @@ package com.modena.model;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "master_series")
 public class Series {
@@ -16,17 +17,25 @@ public class Series {
     @Column(name = "active")
     private Integer active;
 
-    @Column(name = "position")
-    private Integer position;
+    @Column(name = "sequence")
+    private Integer sequence;
+
+    @Column(name = "country_code")
+    private String country_code;
+
+    @Column(name = "language_code")
+    private String language_code;
 
     public Series() {
 
     }
 
-    public Series(String name, Integer active, Integer position) {
+    public Series(String name, Integer active, Integer sequence, String country_code, String language_code) {
         this.name = name;
         this.active = active;
-        this.position = position;
+        this.sequence = sequence;
+        this.country_code = country_code;
+        this.language_code = language_code;
     }
 
     public long getId() {
@@ -49,18 +58,35 @@ public class Series {
         this.active = active;
     }
 
-    public Integer getPosition() {
-        return position;
+    public Integer getSequence() {
+        return sequence;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
     }
+
+    public String getLanguage_code() {
+        return language_code;
+    }
+
+    public void setLanguage_code(String language_code) {
+        this.language_code = language_code;
+    }
+
+    public String getCountry_code() {
+        return country_code;
+    }
+
+    public void setCountry_code(String country_code) {
+        this.country_code = country_code;
+    }
+
 
 
 
     @Override
     public String toString() {
-        return "Series [id=" + id + ", name=" + name + ",  active=" + active + ", position=" + position +"]";
+        return "Series [id=" + id + ", name=" + name + ",  active=" + active + ", sequence=" + sequence + ", language_code="+ language_code +", country_code=" + country_code +" ]";
     }
 }
