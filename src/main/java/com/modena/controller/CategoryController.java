@@ -29,20 +29,20 @@ public class CategoryController {
   CategoryRepository categoryRepository;
 
   @GetMapping("/category")
-  public ResponseEntity<List<Category>> getAllCategorys(@RequestParam(required = false) String name) {
+  public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) String name) {
     try {
-      List<Category> category = new ArrayList<Category>();
+      List<Category> categories = new ArrayList<Category>();
 
       if (name == null)
-        categoryRepository.findAll().forEach(category::add);
+        categoryRepository.findAll().forEach(categories::add);
       else
-        categoryRepository.findByNameContaining(name).forEach(category::add);
+        categoryRepository.findByNameContaining(name).forEach(categories::add);
 
-      if (category.isEmpty()) {
+      if (categories.isEmpty()) {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
 
-      return new ResponseEntity<>(category, HttpStatus.OK);
+      return new ResponseEntity<>(categories, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -63,7 +63,7 @@ public class CategoryController {
   public ResponseEntity<Category> createCategorys(@RequestBody Category category) {
     try {
       Category _category = categoryRepository
-      .save(new Category(category.getName(), category.getActive(), category.getPosition()));
+      .save(new Category(category.getSegment_id(), category.getName(), category.getActive(), category.getPosition(), category.getCountry_code(), category.getLanguage_code()));
       return new ResponseEntity<>(_category, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,9 +76,12 @@ public class CategoryController {
 
     if (categoryData.isPresent()) {
       Category _category = categoryData.get();
+      _category.setSegment_id(category.getSegment_id());
       _category.setName(category.getName());
       _category.setActive(category.getActive());
       _category.setPosition(category.getPosition());
+      _category.setCountry_code(category.getCountry_code());
+      _category.setLanguage_code(category.getLanguage_code());
       return new ResponseEntity<>(categoryRepository.save(_category), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
