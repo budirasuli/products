@@ -64,7 +64,7 @@ public class SegmenController {
   public ResponseEntity<Segmen> createSegmen(@RequestBody Segmen segmen) {
     try {
       Segmen _segmen = segmenRepository
-      .save(new Segmen(segmen.getName(), segmen.getActive(), segmen.getPosition(), segmen.getLanguage_code(), segmen.getCountry_code()));
+      .save(new Segmen(segmen.getId_product_segment_id(), segmen.getName(), segmen.getActive(), segmen.getSort(), segmen.getLanguage_code(), segmen.getCountry_code()));
       return new ResponseEntity<>(_segmen, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -77,9 +77,10 @@ public class SegmenController {
 
     if (segmenData.isPresent()) {
       Segmen _segmen = segmenData.get();
+      _segmen.setId_product_segment_id(segmen.getId_product_segment_id());
       _segmen.setName(segmen.getName());
       _segmen.setActive(segmen.getActive());
-      _segmen.setPosition(segmen.getPosition());
+      _segmen.setSort(segmen.getSort());
       _segmen.setCountry_code(segmen.getCountry_code());
       _segmen.setLanguage_code(segmen.getLanguage_code());
       return new ResponseEntity<>(segmenRepository.save(_segmen), HttpStatus.OK);
