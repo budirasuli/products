@@ -63,7 +63,7 @@ public class SubcategoryController {
   public ResponseEntity<Subcategory> createSubcategorys(@RequestBody Subcategory subcategory) {
     try {
       Subcategory _subcategory = subcategoryRepository
-      .save(new Subcategory(subcategory.getId_product_sub_category_id(), subcategory.getId_product_category_id(), subcategory.getId_product_segment_id(), subcategory.getName(), subcategory.getActive(), subcategory.getCountry_code(), subcategory.getLanguage_code(), subcategory.getIs_tradein(), subcategory.getIs_rental()));
+      .save(new Subcategory(subcategory.getId_product_sub_category_id(), subcategory.getId_product_category_id(), subcategory.getId_product_segment_id(), subcategory.getName(), subcategory.getActive(), subcategory.getCountry_code(), subcategory.getLanguage_code(), subcategory.getIs_tradein(), subcategory.getIs_rental(), subcategory.getSort()));
       return new ResponseEntity<>(_subcategory, HttpStatus.CREATED);
       } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -83,6 +83,9 @@ public class SubcategoryController {
       _subcategory.setActive(subcategory.getActive());
       _subcategory.setCountry_code(subcategory.getCountry_code());
       _subcategory.setLanguage_code(subcategory.getLanguage_code());
+      _subcategory.setIs_tradein(subcategory.getIs_tradein());
+      _subcategory.setIs_rental(subcategory.getIs_rental());
+      _subcategory.setSort(subcategory.getSort());
       return new ResponseEntity<>(subcategoryRepository.save(_subcategory), HttpStatus.OK);
     } else {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
