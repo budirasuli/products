@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeController {
     @GetMapping("/checkapi")
     public String getEmployees() {
-        return "API Server Ready Ver.1.0.1";
+        return "API Server Ready Ver.1.0.2";
     }
 }
