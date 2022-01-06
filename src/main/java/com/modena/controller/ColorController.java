@@ -64,7 +64,7 @@ public class ColorController {
   public ResponseEntity<Color> createColors(@RequestBody Color color) {
     try {
       Color _color = colorRepository
-      .save(new Color(color.getName(), color.getActive(), color.getSequence(), color.getLanguage_code(), color.getCountry_code()));
+      .save(new Color(color.getId_product_color_id(), color.getName(), color.getActive(), color.getSort(), color.getLanguage_code(), color.getCountry_code()));
       return new ResponseEntity<>(_color, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -77,9 +77,10 @@ public class ColorController {
 
     if (colorData.isPresent()) {
       Color _color = colorData.get();
+      _color.setId_product_color_id(color.getId_product_color_id());
       _color.setName(color.getName());
       _color.setActive(color.getActive());
-      _color.setSequence(color.getSequence());
+      _color.setSort(color.getSort());
       _color.setCountry_code(color.getCountry_code());
       _color.setLanguage_code(color.getLanguage_code());
       return new ResponseEntity<>(colorRepository.save(_color), HttpStatus.OK);
