@@ -9,5 +9,5 @@ import com.modena.model.Segmen;
 public interface SegmenRepository extends JpaRepository<Segmen, Long> {
     List<Segmen> findByActive(Integer active);
     List<Segmen> findByNameContaining(String name);
-    List<Segmen> findByPosition(Integer position);
+    List<Segmen> findBySort(Integer sort); 
 }

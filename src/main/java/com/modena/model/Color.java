@@ -3,42 +3,38 @@ package com.modena.model;
 import java.time.LocalDateTime;
 
 import javax.persistence.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 
-@EnableJpaAuditing
 @Entity
-@Table(name = "master_segments")
-public class Segmen {
+@Table(name = "master_color")
+public class Color {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "id_product_segment_id", nullable = false)
-    private Integer id_product_segment_id;
+    @Column(name = "id_product_color_id", nullable = false)
+    private Integer id_product_color_id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "active", nullable = false)
+    @Column(name = "active")
     private Integer active;
 
-    @Column(name = "sort", nullable = false)
+    @Column(name = "sort")
     private Integer sort;
 
-    @Column(name = "country_code", nullable = false)
+    @Column(name = "country_code")
     private String country_code;
 
-    @Column(name = "language_code", nullable = false)
+    @Column(name = "language_code")
     private String language_code;
-
-   
-
 
     //auto fill
     @Column(name = "created_at")
@@ -61,12 +57,12 @@ public class Segmen {
     @LastModifiedBy
     private String modifiedBy;
 
-    public Segmen() {
+    public Color() {
 
     }
 
-    public Segmen(Integer id_product_segment_id, String name, Integer active, Integer sort, String country_code, String language_code) {
-        this.id_product_segment_id = id_product_segment_id;
+    public Color(Integer id_product_color_id, String name, Integer active, Integer sort, String country_code, String language_code) {
+        this.id_product_color_id = id_product_color_id;
         this.name = name;
         this.active = active;
         this.sort = sort;
@@ -78,20 +74,20 @@ public class Segmen {
         return id;
     }
 
+    public Integer getId_product_color_id() {
+        return id_product_color_id;
+    }
+
+    public void setId_product_color_id(Integer id_product_color_id) {
+        this.id_product_color_id = id_product_color_id;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getId_product_segment_id() {
-        return id_product_segment_id;
-    }
-
-    public void setId_product_segment_id(Integer id_product_segment_id) {
-        this.id_product_segment_id = id_product_segment_id;
     }
 
     public Integer getActive() {
@@ -126,6 +122,7 @@ public class Segmen {
         this.country_code = country_code;
     }
 
+    
     public LocalDateTime getCreated_at() {
         return createdAt;
     }
@@ -152,6 +149,6 @@ public class Segmen {
 
     @Override
     public String toString() {
-        return "Segments [id=" + id + ", id_product_segment_id=" + id_product_segment_id + ", segment_name=" + name + ",  active=" + active + ", sort=" + sort + ", language_code="+ language_code +", country_code=" + country_code +", created_at="+ createdAt +", updated_at="+ updatedAt +"]";
+        return "Color [id=" + id + ", id_product_color_id="+ id_product_color_id +", name=" + name + ",  active=" + active + ", sort=" + sort + ", language_code="+ language_code +", country_code=" + country_code +" ]";
     }
 }
