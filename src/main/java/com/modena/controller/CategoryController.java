@@ -63,7 +63,7 @@ public class CategoryController {
   public ResponseEntity<Category> createCategorys(@RequestBody Category category) {
     try {
       Category _category = categoryRepository
-      .save(new Category(category.getSegment_id(), category.getName(), category.getActive(), category.getPosition(), category.getCountry_code(), category.getLanguage_code()));
+      .save(new Category(category.getId_product_category_id(), category.getId_product_segment_id(), category.getName(), category.getActive(), category.getLanguage_code(), category.getCountry_code()));
       return new ResponseEntity<>(_category, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,10 +76,10 @@ public class CategoryController {
 
     if (categoryData.isPresent()) {
       Category _category = categoryData.get();
-      _category.setSegment_id(category.getSegment_id());
+      _category.setId_product_category_id(category.getId_product_category_id());
+      _category.setId_product_segment_id(category.getId_product_segment_id());
       _category.setName(category.getName());
       _category.setActive(category.getActive());
-      _category.setPosition(category.getPosition());
       _category.setCountry_code(category.getCountry_code());
       _category.setLanguage_code(category.getLanguage_code());
       return new ResponseEntity<>(categoryRepository.save(_category), HttpStatus.OK);
