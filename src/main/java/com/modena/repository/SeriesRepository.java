@@ -9,5 +9,5 @@ import com.modena.model.Series;
 public interface SeriesRepository extends JpaRepository<Series, Long> {
     List<Series> findByActive(Integer active);
     List<Series> findByNameContaining(String name);
-    List<Series> findBySequence(Integer sequence);    
+    List<Series> findBySort(Integer sort);    
 }

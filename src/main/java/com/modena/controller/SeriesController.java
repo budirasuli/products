@@ -64,7 +64,7 @@ public class SeriesController {
   public ResponseEntity<Series> createSeries(@RequestBody Series series) {
     try {
       Series _series = seriesRepository
-      .save(new Series(series.getName(), series.getActive(), series.getSequence(), series.getLanguage_code(), series.getCountry_code()));
+      .save(new Series(series.getId_product_series_id(), series.getName(), series.getActive(), series.getSort(), series.getLanguage_code(), series.getCountry_code()));
       return new ResponseEntity<>(_series, HttpStatus.CREATED);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -77,9 +77,10 @@ public class SeriesController {
 
     if (seriesData.isPresent()) {
       Series _series = seriesData.get();
+      _series.setId_product_series_id(series.getId_product_series_id());
       _series.setName(series.getName());
       _series.setActive(series.getActive());
-      _series.setSequence(series.getSequence());
+      _series.setSort(series.getSort());
       _series.setCountry_code(series.getCountry_code());
       _series.setLanguage_code(series.getLanguage_code());
       return new ResponseEntity<>(seriesRepository.save(_series), HttpStatus.OK);
