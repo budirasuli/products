@@ -37,6 +37,10 @@ public class Category {
     @Column(name = "language_code", nullable = false)
     private String language_code;
 
+    @Column(name = "sort", nullable = false)
+    private Integer sort;
+
+
     //auto fill
     @Column(name = "created_at")
     @CreationTimestamp
@@ -63,13 +67,14 @@ public class Category {
     }
 
 
-    public Category(Integer id_product_category_id, Integer id_product_segment_id, String name, Integer active, String country_code, String language_code) {
+    public Category(Integer id_product_category_id, Integer id_product_segment_id, String name, Integer active, String country_code, String language_code, Integer sort) {
         this.id_product_category_id = id_product_category_id;
         this.id_product_segment_id = id_product_segment_id;
         this.name = name;
         this.active = active;
         this.country_code = country_code;
         this.language_code = language_code;
+        this.sort = sort;
     }
 
     public long getId() {
@@ -125,9 +130,17 @@ public class Category {
         this.country_code = country_code;
     }
 
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
 
     @Override
     public String toString() {
-        return "Category [id=" + id + ", id_product_category_id="+ id_product_category_id +", id_product_segment_id=" + id_product_segment_id + ", name=" + name + ",  active=" + active + ", language_code="+ language_code +", country_code=" + country_code +"]";
+        return "Category [id=" + id + ", id_product_category_id="+ id_product_category_id +", id_product_segment_id=" + id_product_segment_id + ", name=" + name + ",  active=" + active + ", language_code="+ language_code +", country_code=" + country_code + ", sort=" + sort +"]";
     }
 }
