@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 // import org.springframework.web.bind.annotation.PostMapping;
 // import org.springframework.web.bind.annotation.PutMapping;
 // import org.springframework.web.bind.annotation.RequestBody;
@@ -72,27 +74,26 @@ public class ProductController {
   //   }
   // }
 
-  // @PutMapping("/subcategory/{id}")
-  // public ResponseEntity<Subcategory> updateSubcategorys(@PathVariable("id") long id, @RequestBody Subcategory subcategory) {
-  //   Optional<Subcategory> subcategoryData = subcategoryRepository.findById(id);
+  @PutMapping("/product/{id}")
+  public ResponseEntity<Product> updateProducts(@PathVariable("id") long id, @RequestBody Product product) {
+    Optional<Product> productData = productRepository.findById(id);
 
-  //   if (subcategoryData.isPresent()) {
-  //     Subcategory _subcategory = subcategoryData.get();
-  //     _subcategory.setId_product_sub_category_id(subcategory.getId_product_sub_category_id());
-  //     _subcategory.setId_product_category_id(subcategory.getId_product_category_id());
-  //     _subcategory.setId_product_segment_id(subcategory.getId_product_segment_id());
-  //     _subcategory.setName(subcategory.getName());
-  //     _subcategory.setActive(subcategory.getActive());
-  //     _subcategory.setCountry_code(subcategory.getCountry_code());
-  //     _subcategory.setLanguage_code(subcategory.getLanguage_code());
-  //     _subcategory.setIs_tradein(subcategory.getIs_tradein());
-  //     _subcategory.setIs_rental(subcategory.getIs_rental());
-  //     _subcategory.setSort(subcategory.getSort());
-  //     return new ResponseEntity<>(subcategoryRepository.save(_subcategory), HttpStatus.OK);
-  //   } else {
-  //     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  //   }
-  // }
+    if (productData.isPresent()) {
+      Product _product = productData.get();
+      _product.setId_product(product.getId_product());
+      _product.setId_product_sub_category_id(product.getId_product_sub_category_id());
+      _product.setId_product_category_id(product.getId_product_category_id());
+      _product.setId_product_segment_id(product.getId_product_segment_id());
+      _product.setName(product.getName());
+      _product.setActive(product.getActive());
+      _product.setCountry_code(product.getCountry_code());
+      _product.setLanguage_code(product.getLanguage_code());
+      _product.setSort(product.getSort());
+      return new ResponseEntity<>(productRepository.save(_product), HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+  }
 
   @DeleteMapping("/product/{id}")
   public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") long id) {

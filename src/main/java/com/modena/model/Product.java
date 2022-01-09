@@ -94,7 +94,22 @@ public class Product {
 
     }
 
-    public Product(Integer id_product, Integer id_product_sub_category_id, Integer id_product_category_id, Integer id_product_segment_id, String name, String description,String type, String sku, Integer active ,String country_code, String language_code, Integer sort, String image) {
+    public Product(
+        Integer id_product, 
+        Integer id_product_sub_category_id, 
+        Integer id_product_category_id, 
+        Integer id_product_segment_id, 
+        String name, 
+        String description,
+        String type, 
+        String sku, 
+        Integer active,
+        String country_code, 
+        String language_code, 
+        Integer sort, 
+        String image
+    )
+    {
         this.id_product = id_product;
         this.id_product_sub_category_id = id_product_sub_category_id;
         this.id_product_category_id = id_product_category_id;
@@ -108,9 +123,8 @@ public class Product {
         this.language_code = language_code;
         this.sort = sort;
         this.image = image;
-        
-    }
 
+    }
 
     public long getId() {
         return this.id;
@@ -271,5 +285,11 @@ public class Product {
     public void setImage(String image) {
         this.image = image;
     }
-    
+
+    public Integer getActive() {
+        return active;
+    }
+
+    public void setActive(Integer active) {
+    }
 }
