@@ -3,6 +3,7 @@ package com.modena.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.sql.*;
 
 import com.modena.model.Series;
 import com.modena.repository.SeriesRepository;
@@ -28,6 +29,7 @@ public class SeriesController {
 
   @Autowired
   SeriesRepository seriesRepository;
+  private long id_product_series_id;
 
   @GetMapping("/series")
   public ResponseEntity<List<Series>> getAllSeries(@RequestParam(required = false) String name) {
